@@ -3,8 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Photo } from './photo';
 import { PhotoComment } from './photo-comment';
+import { map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
+import {_throw} from 'rxjs/observable/throw';
+import { environment } from '../../../environments/environment';
 
-const API = 'http://localhost:3000';
+const API = environment.apiUrl;
 
 @Injectable()
 export class PhotoService {
@@ -38,5 +42,25 @@ export class PhotoService {
 
     getComments(photoId: number) {
         return this.http.get<PhotoComment[]>(`${API}/photos/${photoId}/comments`);
+    }
+
+    addComment(photoId: number, commentText: string) {
+        return this.http.post(
+            `${API}/photos/${photoId}/comments`,
+            {commentText});
+    }
+
+    removePhoto(photoId: number) {
+        return this.http.delete(`${API}/photos/${photoId}`);
+    }
+
+    like(photoId: number) {
+        return this.http.post(
+            API + '/photos/' + photoId + '/like', {}, { observe: 'response'}
+        )
+        .pipe(map(res => true))
+        .pipe(catchError(err => {
+            return err.status === '304' ? of(false) : _throw(err);
+        }));
     }
 }

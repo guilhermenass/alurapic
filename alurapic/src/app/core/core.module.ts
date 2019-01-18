@@ -10,13 +10,16 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginGuard } from './auth/login.guard.';
 import { BrowserModule } from '@angular/platform-browser';
+import { AlertModule } from '../shared/components/alert/alert.module';
+import { AlertService } from '../shared/components/alert/alert.service';
 
 @NgModule({
     declarations: [HeaderComponent, FooterComponent],
     imports: [
         CommonModule,
         RouterModule,
-        BrowserModule
+        BrowserModule,
+        AlertModule
     ],
     exports: [
         HeaderComponent,
@@ -24,6 +27,7 @@ import { BrowserModule } from '@angular/platform-browser';
     ],
     providers: [
         UserService,
+        AlertService,
         AuthGuard,
         LoginGuard,
         TokenService,

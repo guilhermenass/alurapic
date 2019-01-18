@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PhotoService } from '../photo/photo.service';
 import { Photo } from '../photo/photo';
 import { Observable } from 'rxjs/observable';
+import { AlertService } from '../../shared/components/alert/alert.service';
+import { UserService } from '../../core/user/user.service';
 
 @Component({
   selector: 'app-photo-detail',
-  templateUrl: './photo-detail.component.html',
-  styleUrls: ['./photo-detail.component.css']
+  templateUrl: './photo-detail.component.html'
 })
 export class PhotoDetailComponent implements OnInit {
 
@@ -15,6 +16,9 @@ export class PhotoDetailComponent implements OnInit {
   photoId: number;
 
   constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private userService: UserService,
+              private alertService: AlertService,
               private photoService: PhotoService) {
 
   }
@@ -22,5 +26,32 @@ export class PhotoDetailComponent implements OnInit {
   ngOnInit() {
     this.photoId = this.activatedRoute.snapshot.params.photoId;
     this.photo$ = this.photoService.findById(this.photoId);
+    this.photo$.subscribe(() => {}, err => {
+      console.log(err);
+      this.router.navigate(['not-found']);
+    });
+  }
+
+  removePhoto() {
+    this.photoService
+      .removePhoto(this.photoId)
+      .subscribe(
+        () => {
+          this.alertService.success('Photo removed', true);
+          this.router.navigate(['/user', this.userService.getUserName()]);
+        },
+        (error) => {
+          console.log(error);
+          this.alertService.warning('Could not remove photo', true);
+        });
+  }
+
+  like(photo: Photo) {
+    this.photoService.like(photo.id)
+      .subscribe(liked => {
+        if (liked) {
+          this.photo$ = this.photoService.findById(photo.id);
+        }
+      });
   }
 }
