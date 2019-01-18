@@ -12,14 +12,21 @@ import { LoginGuard } from './auth/login.guard.';
 import { BrowserModule } from '@angular/platform-browser';
 import { AlertModule } from '../shared/components/alert/alert.module';
 import { AlertService } from '../shared/components/alert/alert.service';
+import { LoadingModule } from '../shared/components/loading/loading.module';
+import { MenuModule } from '../shared/components/menu/menu.module';
 
 @NgModule({
-    declarations: [HeaderComponent, FooterComponent],
+    declarations: [
+        HeaderComponent,
+        FooterComponent
+    ],
     imports: [
         CommonModule,
         RouterModule,
         BrowserModule,
-        AlertModule
+        AlertModule,
+        LoadingModule,
+        MenuModule
     ],
     exports: [
         HeaderComponent,

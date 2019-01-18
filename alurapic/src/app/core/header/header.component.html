@@ -1,6 +1,9 @@
 <header class="sticky-top">
     <nav class="navbar navbar-light bg-white">
-        <a class="navbar-brand">ALURAPIC</a>
+        <a class="navbar-brand">
+            ALURAPIC
+        </a>
+        <app-menu #menu></app-menu>
         <div *ngIf="(user$ | async) as user; else login">
             <i class="fa fa-user-circle mr-1"></i>
             <a class="mr-1">{{ user?.name }}</a>
@@ -15,6 +18,7 @@
     </nav>
 
     <div class="fixed-top">
+        <app-loading></app-loading>
         <app-alert></app-alert>
     </div>
 </header>
