@@ -14,6 +14,7 @@ import { AlertModule } from '../shared/components/alert/alert.module';
 import { AlertService } from '../shared/components/alert/alert.service';
 import { LoadingModule } from '../shared/components/loading/loading.module';
 import { MenuModule } from '../shared/components/menu/menu.module';
+import { ShowIfLoggedModule } from '../shared/directives/show-if-logged/show-if-logged.module';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { MenuModule } from '../shared/components/menu/menu.module';
         BrowserModule,
         AlertModule,
         LoadingModule,
-        MenuModule
+        MenuModule,
+        ShowIfLoggedModule
     ],
     exports: [
         HeaderComponent,

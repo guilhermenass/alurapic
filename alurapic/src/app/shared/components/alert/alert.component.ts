@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Alert, AlertType } from './alert';
 import { AlertService } from './alert.service';
-import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-alert',

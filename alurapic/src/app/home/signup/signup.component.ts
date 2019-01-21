@@ -4,6 +4,7 @@ import { UserNotTakenValidatorService } from './user-not-taken.validator.service
 import { NewUser } from './new-user';
 import { SignUpService } from './signup.service';
 import { Router } from '@angular/router';
+import { userNamePasswordValidator } from './username-password.validator';
 
 @Component({
     templateUrl: './signup.component.html',
@@ -50,6 +51,9 @@ export class SignupComponent implements OnInit {
                     Validators.maxLength(14)
                 ]
             ]
+        },
+        {
+            validator: userNamePasswordValidator
         });
         this.inputEmail.nativeElement.focus();
     }

@@ -21,12 +21,14 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@types/stacktrace-js": "0.0.32",
     "bootstrap": "^4.1.1",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
     "ngx-bootstrap": "^3.1.4",
     "rxjs": "^5.5.6",
+    "stacktrace-js": "^2.0.0",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
